@@ -15,7 +15,7 @@ export default function Calculator() {
 
         // Création "p" dans "screen" 
         let p = document.createElement("p");
-        p.textContent = 0;
+        p.textContent;
         screen.append(p);
 
         // Création "div" classe "operators"
@@ -32,25 +32,36 @@ export default function Calculator() {
             operators.append(operator);
         }
 
+        // Création "div" classe "nums_egale"
+        let nums_egale = document.createElement("div");
+        nums_egale.classList.add("nums_egale");
+        div.append(nums_egale);
+
         // Création "div" classe "nums"
         let nums = document.createElement("div");
         nums.classList.add("nums");
-        div.append(nums);
+        nums_egale.append(nums);
 
-        // Création des boutons de 0 à 9
-        for (let i=0; i<=9; i++) {
+        // Création des boutons de 1 à 9
+        for (let i=1; i<=9; i++) {
             let button = document.createElement("button");
             button.textContent = i;
-            button.classList.add("buttons");
-            nums.append(button);
+            button.classList.add("buttons", "num");
+            nums.append((button));
         }
+        
+        // Création du bouton "="
+        let equal = document.createElement("button");
+        equal.textContent = "=";
+        equal.classList.add("equal", "buttons");
+        nums_egale.append(equal);
 
         // Création "div" classe "others"
         let others = document.createElement("div");
         others.classList.add("others");
         div.append(others);
 
-        // Création des boutons "ac", ".", "="
+        // Création des boutons "ac", "." "0"
         let ac = document.createElement("button");
         ac.textContent = "AC";
         ac.classList.add("ac", "buttons");
@@ -61,25 +72,73 @@ export default function Calculator() {
         comma.classList.add("comma", "buttons");
         others.append(comma);
 
-        let equal = document.createElement("button");
-        equal.textContent = "=";
-        equal.classList.add("equal", "buttons");
-        others.append(equal);
+        let zero = document.createElement("button");
+        zero.textContent = "0";
+        zero.classList.add("num", "buttons");
+        others.append(zero);
 
         // Au clic afficher "buttons" dans "screen"
         div.addEventListener("click", function(event) {
-            if (event.target.textContent.length <= 1 && event.target.textContent != "=") {
-                console.log(event.target.textContent);
+            // Affichage des boutons à l'écran
+            if (Number(event.target.textContent) && event.target.textContent.length <= 1 || event.target.textContent != "=" && event.target.textContent != "AC" && event.target.textContent.length <= 1) {
                 p.textContent += event.target.textContent;
             }
+            // Remise à 0 de l'écran
             else if ((event.target.textContent == "AC")){
-                p.textContent = 0;
+                p.textContent = "";
             }
+            
+            // Calcule et afficher le résultat à l'écran
             else if (event.target.textContent == "="){
-                for (let i=0; i<p.textContent.length; i++) {
-                    if (p.textContent[i] == "+") {
-                        console.log(p.textContent[i]);
+                let result_number = "";
+                let result_number2 = "";
+
+                if (p.textContent.indexOf("+") != -1) {
+                    for (let i=0; i<p.textContent.indexOf("+"); i++) {
+                        result_number += p.textContent[i];
                     }
+                    
+                    for (let i = (p.textContent.indexOf("+"))+1; i<p.textContent.length; i++) {
+                        result_number2 += p.textContent[i];
+                    }
+
+                    p.textContent = Number(result_number)+Number(result_number2);
+                }
+                
+                else if (p.textContent.indexOf("-") != -1) {
+                    for (let i=0; i<p.textContent.indexOf("-"); i++) {
+                        result_number += p.textContent[i];
+                    }
+                    
+                    for (let i = (p.textContent.indexOf("-"))+1; i<p.textContent.length; i++) {
+                        result_number2 += p.textContent[i];
+                    }
+
+                    p.textContent = Number(result_number)-Number(result_number2);
+                }
+                
+                else if (p.textContent.indexOf("x") != -1) {
+                    for (let i=0; i<p.textContent.indexOf("x"); i++) {
+                        result_number += p.textContent[i];
+                    }
+                    
+                    for (let i = (p.textContent.indexOf("x"))+1; i<p.textContent.length; i++) {
+                        result_number2 += p.textContent[i];
+                    }
+
+                    p.textContent = Number(result_number)*Number(result_number2);
+                }
+
+                else if (p.textContent.indexOf("/") != -1) {
+                    for (let i=0; i<p.textContent.indexOf("/"); i++) {
+                        result_number += p.textContent[i];
+                    }
+                    
+                    for (let i = (p.textContent.indexOf("/"))+1; i<p.textContent.length; i++) {
+                        result_number2 += p.textContent[i];
+                    }
+
+                    p.textContent = Number(result_number)/Number(result_number2);
                 }
             }
         });

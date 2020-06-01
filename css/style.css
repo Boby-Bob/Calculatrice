@@ -1,46 +1,102 @@
 body {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    font-family: 'Noto Serif JP', serif;
 }
 .calculator {
-    background-color: black;
+    background-color: white;
+    border: 1px solid black;
     width: 400px;
-    height: 500px;
     margin: 20px;
 }
 .buttons {
-    height: 70px;
-    width: 60px;
+    width: 72px;
+    height: 60px;
     margin: 10px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 1.4rem;
 }
 .screen {
     width: 100%;
     height: 80px;
-    background-color: white;
-    border: 1px solid black;
+    background-color: black;
+    color: white;
+    font-size: 3rem;
 }
 .operators {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.operator {
+    color: rgb(56, 148, 209);
+}
 p {
     display: flex;
     justify-content: flex-end;
-
-    margin-right: 10px;
-    font-size: 2rem;
+    margin: 0 10px auto 0;
+}
+.nums_egale {
+    display: flex;
+    align-items: flex-start;
+    height: 240px;
+    justify-content: center;
+}
+.nums {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 70%;
+    justify-content: flex-end;
 }
 .others {
     display: flex;
     justify-content: center;
+    width: 78%;
+
 }
 .buttons:hover {
-    background-color: rgb(221, 221, 221);
     position: relative;
-    top: 2px;
     left: 2px;
+    top: 2px;
+    background-color: rgb(226, 226, 226);
+}
+.equal {
+    height: 300px;
+    background-color: rgb(56, 148, 209);
+}
+.equal:hover {
+    background-color: rgb(40, 121, 175);
+}
+.ac {
+    background-color: rgb(255, 49, 49);
+    color: white;
+}
+.ac:hover {
+    background-color: rgb(231, 28, 28);
+    color: white;
+}
+@media screen and (max-width: 452px) {
+
+    .nums_egale {
+        justify-content: flex-end;
+        height: 205px;
+    }
+    .buttons {
+        width: 63px;
+        height: 52.5px;
+        margin: 8px;
+    }
+    .nums {
+        width: 80%;
+    }
+    .others {
+        width: 77%;
+    }
+    .equal {
+        height: 260px;
+    }
 }
